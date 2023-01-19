@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  elastic-master:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0 # Specifying the latest available image - modify if you want a specific version
+    container_name: elastic-master
+    environment:
+      - cluster.name=elastic-cluster # Name the cluster
+      - node.name=elastic-master # Name the node that will run in this container
+      - discovery.seed_hosts=elastic-master # Nodes to look for when discovering the cluster
+      - cluster.initial_master_nodes=elastic-master # Nodes eligibile to serve as cluster manager
+      - bootstrap.memory_lock=true # Disable JVM heap memory swapping
+      - xpack.security.enabled=false 
+      - "elastic_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
+    ulimits:
+      memlock:
+        soft: -1 # Set memlock to unlimited (no soft or hard limit)
+        hard: -1
+      nofile:
+        soft: 65536 # Maximum number of open files for the elastic user - set to at least 65536
+        hard: 65536
+    volumes:
+      - elastic-master:/usr/share/elastic/data # Creates volume called elastic-data1 and mounts it to the container
+    ports:
+      # - 9200:9200 # REST API
+      - 9600:9600 # Performance Analyzer
+    networks:
+      - elastic-net # All of the containers will join the same Docker bridge network
+  elastic-dashboards:
+    image: docker.elastic.co/kibana/kibana:8.6.0
+    container_name: elastic-dashboards
+    ports:
+      - 5601:5601 # Map host port 5601 to container port 5601
+    expose:
+      - "5601" # Expose port 5601 for web access to elastic Dashboards
+    environment:
+      elastic_HOSTS: '["http://elastic-master:9200"]' # Define the elastic nodes that elastic Dashboards will query
+      xpack.security.enabled: false 
+    networks:
+      - elastic-net
+
+volumes:
+  elastic-master:
+
+networks:
+  elastic-net:

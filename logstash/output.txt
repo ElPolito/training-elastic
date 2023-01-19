@@ -1,0 +1,2 @@
+{"@timestamp":"2023-01-10T13:36:17.417184200Z","quantity":10,"@version":"1","event":{"original":"{ \"quantity\": \"10\" }\n"},"host":{"hostname":"dae3da450fdc"}}
+{"@version":"1","amount":10,"event":{"original":"{ \"amount\": \"10\", \"quantity\": \"5\" }\n"},"host":{"hostname":"dae3da450fdc"},"quantity":5,"@timestamp":"2023-01-10T13:37:48.317801300Z"}

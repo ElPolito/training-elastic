@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "columns": [
+            "_source"
+        ],
+        "description": "",
+        "hits": 0,
+        "kibanaSavedObjectMeta": {
+            "searchSourceJSON": "{\"highlightAll\":true,\"version\":true,\"query\":{\"query\":\"user_agent.os.name : Windows and http.response.status_code : 200\",\"language\":\"kuery\"},\"filter\":[],\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\"}"
+        },
+        "sort": [],
+        "title": "Test search",
+        "version": 1
+    },
+    "id": "1ee11570-970d-11ed-a51c-1db821016a53",
+    "migrationVersion": {
+        "search": "7.9.3"
+    },
+    "references": [
+        {
+            "id": "ad245130-9672-11ed-9816-bfb802391920",
+            "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+            "type": "index-pattern"
+        }
+    ],
+    "type": "search",
+    "updated_at": "2023-01-18T08:50:12.678Z",
+    "version": "WzUyMSwyXQ=="
+}

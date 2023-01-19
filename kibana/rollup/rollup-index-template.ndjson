@@ -1,0 +1,15 @@
+{
+    "attributes": {
+        "fields": "[{\"count\":0,\"name\":\"@timestamp.date_histogram\",\"type\":\"date\",\"esTypes\":[\"date\"],\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"count\":0,\"name\":\"_index\",\"type\":\"string\",\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"count\":0,\"name\":\"_id\",\"type\":\"string\",\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"count\":0,\"name\":\"_score\",\"type\":\"number\",\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"count\":0,\"name\":\"_source\",\"type\":\"_source\",\"scripted\":false,\"searchable\":false,\"aggregatable\":false,\"readFromDocValues\":false},{\"count\":0,\"name\":\"geoip.geo.continent_code.keyword.terms\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"count\":0,\"name\":\"http.response.status_code.terms\",\"type\":\"number\",\"esTypes\":[\"long\"],\"scripted\":false,\"searchable\":false,\"aggregatable\":true,\"readFromDocValues\":true},{\"count\":0,\"name\":\"user_agent.os.name.keyword.terms\",\"type\":\"string\",\"esTypes\":[\"keyword\"],\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true},{\"count\":0,\"name\":\"http.response.body.bytes.avg.sum\",\"type\":\"number\",\"esTypes\":[\"float\"],\"scripted\":false,\"searchable\":false,\"aggregatable\":true,\"readFromDocValues\":true},{\"count\":0,\"name\":\"http.response.body.bytes.avg.value_count\",\"type\":\"number\",\"esTypes\":[\"long\"],\"scripted\":false,\"searchable\":false,\"aggregatable\":true,\"readFromDocValues\":true},{\"count\":0,\"name\":\"http.response.status_code.value_count\",\"type\":\"number\",\"esTypes\":[\"long\"],\"scripted\":false,\"searchable\":false,\"aggregatable\":true,\"readFromDocValues\":true}]",
+        "timeFieldName": "@timestamp.date_histogram",
+        "title": "rollup-idx-1-fixed"
+    },
+    "id": "198dcc50-9729-11ed-a51c-2db821016a53",
+    "migrationVersion": {
+        "index-pattern": "7.6.0"
+    },
+    "references": [],
+    "type": "index-pattern",
+    "updated_at": "2023-01-18T12:10:29.652Z",
+    "version": "WzU0NywyXQ=="
+}
