@@ -121,12 +121,24 @@ Okapi BM25
 
 ## Kibana
 
+### Présentation
+
+- Outil permettant la visualisation des données
+- Récupère les données depuis Elasticsearch
+- 
+
 ### Rollup
 
-- Permet de créer des agrégats à partir d'un index
-- Permet 
+- Création d'agrégats à partir d'un index
+- Personnalisable, on doit configurer les agrégats
+- Peut permettrer de supprimer des indices lorsqu'ils sont trop vieux tout en sauvegardant des informations pertinentes
+- Peut être intégré dans une politique de gestion d'index (plus possible sur elasticsearch voir Downsample)
 
-<color style="color: red">TODO</color>
+### Downsample
+
+- Création d'agrégats à partir d'un index à des intervalles réguliers
+- Pas personnalisable, les agrégats sont faits sur toutes les métriques de l'index
+- Peut être intégré dans une politique de gestion d'index
 
 ## Logstash
 
@@ -245,8 +257,8 @@ Pour faciliter la création de dashboards dans Kibana, si on utilise des modules
 | Fonctionnalité | Elastic | Opensearch | Résultat |
 |----------------|---------|------------|----------|
 | ***Elasticsearch et Opensearch*** ||||
-| Node         | Test    | Test       | Test     | 
-| Politique de gestion des indices         | Test    | Test       | Test     | 
+| Data Nodes         | Elasticsearch propose des rôles pour les différents tiers de data nodes (content, hot, warm, cold, frozen). Cela rend très facile la gestion des nodes et le cycle de vie des indices. | Opensearch propose un seul rôle (data) pour les data nodes. Il est possible de gérer différents tiers en ajoutant des attributs aux nodes. Cependant, il n'est pas possible d'avoir un niveau *content* comme dans Elasticsearch qui permettrait de stocker les indices systèmes par exemple. | La solution d'Elasticsearch est plus élégante et permet de bien gérer les différents tiers d'autant plus qu'il est tout de même possible d'ajouter des attributs sur les noeuds comme sur Opensearch. | 
+| Politique de gestion des indices         | Elasticsearch propose les actions suivantes : - Allocate - Delete    | Test       | Les deux services proposent plus ou moins les mêmes services. Encore une fois Elasticsearch offre des solutions un peu plus avancées qui permettent d'obtenir un résultat plus élégant.  | 
 | ***Kibana et Opensearch dashboards*** ||||
 | Rollup         | Test    | Test       | Test     | 
 | Lens           | Test    | Test       | Test     |
@@ -254,6 +266,16 @@ Pour faciliter la création de dashboards dans Kibana, si on utilise des modules
 | ***Beats*** ||||
 | Dashboards Kibana         | Test    | Test       | Test     | 
 
+
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
 
 ## Annexes
 
