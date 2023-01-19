@@ -254,28 +254,23 @@ Pour faciliter la création de dashboards dans Kibana, si on utilise des modules
 
 ## Elastic vs Opensearch
 
+Opensearch est un Fork de Elastic offrant deux solutions : Opensearch qui est l'équivalent de Elasticsearch et Opensearch Dashboards l'équivalent de Kibana. Les solutions de Opensearch sont entièrement gratuites contrairement à Elastic mais elles ne disposent pas de toutes les améliorations apportées à Elastic.
+
 | Fonctionnalité | Elastic | Opensearch | Résultat |
 |----------------|---------|------------|----------|
-| ***Elasticsearch et Opensearch*** ||||
+| ***Elasticsearch et Opensearch***                |
 | Data Nodes         | Elasticsearch propose des rôles pour les différents tiers de data nodes (content, hot, warm, cold, frozen). Cela rend très facile la gestion des nodes et le cycle de vie des indices. | Opensearch propose un seul rôle (data) pour les data nodes. Il est possible de gérer différents tiers en ajoutant des attributs aux nodes. Cependant, il n'est pas possible d'avoir un niveau *content* comme dans Elasticsearch qui permettrait de stocker les indices systèmes par exemple. | La solution d'Elasticsearch est plus élégante et permet de bien gérer les différents tiers d'autant plus qu'il est tout de même possible d'ajouter des attributs sur les noeuds comme sur Opensearch. | 
-| Politique de gestion des indices         | Elasticsearch propose les actions suivantes : - Allocate - Delete    | Test       | Les deux services proposent plus ou moins les mêmes services. Encore une fois Elasticsearch offre des solutions un peu plus avancées qui permettent d'obtenir un résultat plus élégant.  | 
-| ***Kibana et Opensearch dashboards*** ||||
-| Rollup         | Test    | Test       | Test     | 
-| Lens           | Test    | Test       | Test     |
-| Canvas         | Test    | Test       | Test     | 
-| ***Beats*** ||||
-| Dashboards Kibana         | Test    | Test       | Test     | 
+| Data stream | - | Il n'est pas possible d'ajouter une politique de gestion des indices par défaut pour un datastream. | - |
+| Politique de gestion des indices         | Elasticsearch propose les actions suivantes : (Allocate, Delete, Force merge, Migrate, Read only, Rollover, Downsample, Searchable snapshot, Set priority, Shrink, Ufollow et Wait for snapshot). Pour prendre un snapshot d'un index, il faut passer par une politique de gestion des indices et utiliser Wait for snapshot. Pour faire un rollup, il faut utiliser un rollup job mais cette fonctionnalité n'est pas encouragée.   | Opensearch propose les actions suivantes : (Force merge, Read only, Read write, Replica count, Shrink, Close, Open, Delete, Rollover, Notification, Snapshot, Index priority, Allocation et Rollup). | Les deux services proposent plus ou moins les mêmes services. Encore une fois Elasticsearch offre des solutions un peu plus avancées qui permettent d'obtenir un résultat plus élégant.  | 
+| Rollup | La fonctionnalité n'est pas encouragée. Elle fonctionne cependant très bien et permet de visualiser les données dans les dashboards sans problèmes. Il est également possible de faire des requêtes à la fois sur les données Rollup et les données brutes. | Les jobs de rollups fonctionnent bien mais il est très difficile de faire fonctionner les dashboards. Le mapping fait par Opensearch Dashboards par défaut n'est pas le bon, il faut le modifier pour avoir accès aux vrais champs et j'ai eu des problèmes avec la gestion des dates. Pour l'instant je n'ai pas réussi à visualiser les données. La fonctionnalité permet plus de personnalisation que Elasticsearch. Il est possible de renommer les champs de sortie ce qui n'est pas possible avec Elasticsearch. | Bien que Opensearch permette plus de personnalisation, il m'a été impossible de visualiser les données Rollup ce qui rend la fonctionnalité inutilisable. |
+| Downsample | Présent en preview | Non présent | - |
+| Snapshots | Elastic | Opensearch | Résultat |
+| ***Kibana et Opensearch dashboards***            |
+| Lens | TODO | TODO | TODO |
+| Canvas | TODO | TODO | TODO | 
+| ***Beats***                                      |
+| Dashboards Kibana | Les dahsboards sont automatiquement générés et envoyés dans Kibana. Il est possible de les mettre à jour automatiquement à chaque lancement des Beats notamment si il y a des changements de versions. | Il n'est pas possible d'insérer directement les dashboards dans Opensearch Dashboards. J'ai essayé de les injecter à la main en utilisant l'API mais je n'ai pas réussi à créer de Dashboard car il manquait des visualisations qui sont sans doutes de base dans Kibana. Il n'est donc pas possible d'utiliser les dashboards auto générés des Beats. | Pas d'intégration facile avec Opensearch Dashboards. | 
 
-
-+---------------+---------------+--------------------+
-| Fruit         | Price         | Advantages         |
-+===============+===============+====================+
-| Bananas       | $1.34         | - built-in wrapper |
-|               |               | - bright color     |
-+---------------+---------------+--------------------+
-| Oranges       | $2.10         | - cures scurvy     |
-|               |               | - tasty            |
-+---------------+---------------+--------------------+
 
 ## Annexes
 
