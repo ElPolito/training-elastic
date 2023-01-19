@@ -1,3 +1,5 @@
+![](_assets/elastic-logo.svg)
+
 # Resultats
 
 Présentation des résultats suite à la formation sur la suite Elastic (Elasticsearch, Logstash, Kibana, Beats) et la comparaison avec Opensearch.
@@ -28,12 +30,32 @@ Présentation des résultats suite à la formation sur la suite Elastic (Elastic
 - Possibilité de créer plusieurs clusters et de les connecter ensemble afin de faire de la réplication cross-cluster
 - Possibilité de définir des zones afin de répliquer dans les différentes zones
 
+*Figure : Différents types de clusters*
+
+![Not working](_assets/es-cluster.drawio.svg)
+
 ### Index
 
 - Groupe de documents
 - Equivalent d'une table sur une BDD relationnelle
 
+### Similarity Model
+
+Utilisation de TF (term frequency), IDF (inverse document frequency) et Field length norm pour calculer si un resultat est interessant ou non.
+
+Le modèle par défaut utilisé par Elasticsearch est Okapi BM25. Il est basé sur l'algorithme TF/IDF. 
+Anciennement, le modèle par défaut était le classic TF/IDF.
+On utilise le boolean model pour les recherches précises où l'on souhaite des correspondances exactes.
+
+Okapi BM25
+- Term frequency saturation
+- Field length normalization on a per-field basis
+
 ### Sharding et réplicas
+
+*Figure : Structure d'un index*
+
+![Not working](_assets/index-management.drawio.svg)
 
 - Shards
   - Morceaux d'index
@@ -48,6 +70,10 @@ Présentation des résultats suite à la formation sur la suite Elastic (Elastic
   -  Résiliance à la panne
   -  Les réplicas ne peuvent pas être situés sur le même node que le shard principal
 
+*Figure : Allocation des shards et des réplicas sur les noeuds du cluster*
+
+![Not working](_assets/shard-allocation.drawio.svg)
+
 ### Data stream
 
 - Une sorte d'alias pour un index
@@ -60,6 +86,10 @@ Présentation des résultats suite à la formation sur la suite Elastic (Elastic
   - Des options spéciales pour le routing ou les politiques de gestion de l'index
 - Il est possible de faire une rollover sur le datastream afin de créer un nouvel index qui va être responsable d'ingérer les prochaines données
 - Ceci peut être utile pour générer automatiquement des nouveaux indices en fonction de règles définies dans une politique de gestion
+
+*Figure : Fonctionnement d'un data stream*
+
+![Not working](_assets/data-stream.drawio.svg)
 
 ### Politique de gestion des indices
 
@@ -80,6 +110,10 @@ Présentation des résultats suite à la formation sur la suite Elastic (Elastic
   - Taille des shards
   - etc...
 - Possibilité d'affecter une politique à un ensemble d'indices grâce à un wildcard
+
+*Figure : Exemple de politique de gestion des indices*
+
+![Not working](_assets/index-policy.drawio.svg)
 
 ### Snapshots
 
@@ -104,6 +138,10 @@ Présentation des résultats suite à la formation sur la suite Elastic (Elastic
   - Filter
   - Output
 - Permet de définir des pipelines différentes en fonction des types de logs
+
+*Figure : Fonctionnement d'une pipeline*
+
+![Not working](_assets/logstash.drawio.svg)
 
 ### Input
 
@@ -136,18 +174,86 @@ Présentation des résultats suite à la formation sur la suite Elastic (Elastic
 
 ### Output
 
-
+- Transmet les logs fromattés
+- De nombreux plugins existent
+  - Elasticsearch
+  - Opensearch
+  - Kafka
+  - RabbitMQ
+  - etc...
 
 ### Pipeline
 
+- Fichier YAML définissant un ou plusieurs input, des filtres et un ou plusieurs output
+- On peut mettre des conditions ce qui va permettre d'effectuer des filtres ou de sélectionner les outputs
+- Il est possible de supprimer un log avec le plugin *drop*
+- Pour plus de lisibilité, il peut être intéressant de faire plusieurs pipelines si possible plutôt que d'utiliser les structures conditionnelles
+- Il est possible de chainer les pipelines (l'output d'une pipeline est l'input d'une autre pipeline)
+- Le chainage peut être très utile afin de différencier différents types de logs provenant d'une même source
+  - Si l'on reçoit des logs apache de type access et error depuis la même source (un beat par exemple)
+  - On peut définir une pipeline qui va gérer l'input et qui va rediriger les logs sur deux pipelines différentes en fonction du type (access ou error)
+
+*Figure : Présentation d'une pipeline plus avancée*
+
+![Not working](_assets/logstash-multi-pipelines.drawio.svg)
+
 ## Beats
+
+### Présentation
+
+- Outils pour la collecte de logs et de métriques
+- Légers
+- Différents Beats existants :
+  - FileBeat : collecte de logs
+  - MetricBeat : collecte de métriques (statistiques)
+  - PacketBeat : collecte des données sur le réseau
+  - HeartBeat : collecte des données sur la disponibilité des services
+  - etc...
+- Collecte les données puis les envoies à un output
+
+### Input
+
+- Soit l'input par défaut (des fichiers pour FileBeat par exemple)
+- Soit un module
+  - Il existe de nombreux module qui permettent de faciliter la récupération et la transformation des données
+    - Apache
+    - Nginx
+    - Kibana
+    - Elasticsearch
+    - etc...
+  - Les modules permettent également de créer des visualisations directement dans Kibana
+
+### Output
+
+- De nombreux output sont disponibles
+  - Elasticsearch
+  - Logstash
+  - Kafka
+  - Redis
+  - etc...
+
+### Intégration avec Kibana
+
+Pour faciliter la création de dashboards dans Kibana, si on utilise des modules pour les beats, il est possible de générer tout un ensemble de ressources pour Kibana automatiquement.
+
+*Figure : Dashboard dans Kibana généré automatiquement par FileBeat*
+
+![](_assets/kibana-beats.png)
 
 ## Elastic vs Opensearch
 
 | Fonctionnalité | Elastic | Opensearch | Résultat |
 |----------------|---------|------------|----------|
 | ***Elasticsearch et Opensearch*** ||||
-| Rollup         | Test    | Test       | Test     | 
+| Node         | Test    | Test       | Test     | 
+| Politique de gestion des indices         | Test    | Test       | Test     | 
 | ***Kibana et Opensearch dashboards*** ||||
-| ***Logstash*** ||||
+| Rollup         | Test    | Test       | Test     | 
+| Lens           | Test    | Test       | Test     |
+| Canvas         | Test    | Test       | Test     | 
 | ***Beats*** ||||
+| Dashboards Kibana         | Test    | Test       | Test     | 
+
+
+## Annexes
+
