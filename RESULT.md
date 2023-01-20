@@ -1,6 +1,6 @@
 ![](_assets/elastic-logo.svg)
 
-# Resultats
+# Compte rendu suite Elastic
 
 Présentation des résultats suite à la formation sur la suite Elastic (Elasticsearch, Logstash, Kibana, Beats) et la comparaison avec Opensearch.
 
@@ -266,8 +266,8 @@ Opensearch est un Fork de Elastic offrant deux solutions : Opensearch qui est l'
 | Downsample | Présent en preview | Non présent | - |
 | Snapshots | Elastic | Opensearch | Résultat |
 | ***Kibana et Opensearch dashboards***            |
-| Lens | TODO | TODO | TODO |
-| Canvas | TODO | TODO | TODO | 
+| Lens | Permet de faire des visualisations tr7s facilement. | Non disponible. | - |
+| Canvas | Permet d'obtenir un dashboard plus joli pour afficher sur des ecrans par exemple. | Non disponible. | - | 
 | ***Beats***                                      |
 | Dashboards Kibana | Les dahsboards sont automatiquement générés et envoyés dans Kibana. Il est possible de les mettre à jour automatiquement à chaque lancement des Beats notamment si il y a des changements de versions. | Il n'est pas possible d'insérer directement les dashboards dans Opensearch Dashboards. J'ai essayé de les injecter à la main en utilisant l'API mais je n'ai pas réussi à créer de Dashboard car il manquait des visualisations qui sont sans doutes de base dans Kibana. Il n'est donc pas possible d'utiliser les dashboards auto générés des Beats. | Pas d'intégration facile avec Opensearch Dashboards. | 
 
