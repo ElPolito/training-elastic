@@ -117,7 +117,12 @@ Okapi BM25
 
 ### Snapshots
 
-<color style="color: red">TODO</color>
+- Sauvegarde d'un index, d'un data stream ou de l'état du cluster
+- Plus léger qu'un index et ne consomme pas de ressources
+- Permet de restaurer les informations si besoin
+- Peut être géré dans une politique de Gestion d'Index ou dans une politique de Gestion de Snapshots
+- Nécessite un dossier partagé pour le stockage (NFS par exemple)
+- Peuvent être searchable ce qui permet d'y accéder quand même (avec des performances beauoup moins bonnes)
 
 ## Kibana
 
@@ -264,7 +269,7 @@ Opensearch est un Fork de Elastic offrant deux solutions : Opensearch qui est l'
 | Politique de gestion des indices         | Elasticsearch propose les actions suivantes : (Allocate, Delete, Force merge, Migrate, Read only, Rollover, Downsample, Searchable snapshot, Set priority, Shrink, Ufollow et Wait for snapshot). Pour prendre un snapshot d'un index, il faut passer par une politique de gestion des indices et utiliser Wait for snapshot. Pour faire un rollup, il faut utiliser un rollup job mais cette fonctionnalité n'est pas encouragée.   | Opensearch propose les actions suivantes : (Force merge, Read only, Read write, Replica count, Shrink, Close, Open, Delete, Rollover, Notification, Snapshot, Index priority, Allocation et Rollup). | Les deux services proposent plus ou moins les mêmes services. Encore une fois Elasticsearch offre des solutions un peu plus avancées qui permettent d'obtenir un résultat plus élégant.  | 
 | Rollup | La fonctionnalité n'est pas encouragée. Elle fonctionne cependant très bien et permet de visualiser les données dans les dashboards sans problèmes. Il est également possible de faire des requêtes à la fois sur les données Rollup et les données brutes. | Les jobs de rollups fonctionnent bien mais il est très difficile de faire fonctionner les dashboards. Le mapping fait par Opensearch Dashboards par défaut n'est pas le bon, il faut le modifier pour avoir accès aux vrais champs et j'ai eu des problèmes avec la gestion des dates. Pour l'instant je n'ai pas réussi à visualiser les données. La fonctionnalité permet plus de personnalisation que Elasticsearch. Il est possible de renommer les champs de sortie ce qui n'est pas possible avec Elasticsearch. | Bien que Opensearch permette plus de personnalisation, il m'a été impossible de visualiser les données Rollup ce qui rend la fonctionnalité inutilisable. |
 | Downsample | Présent en preview | Non présent | - |
-| Snapshots | Elastic | Opensearch | Résultat |
+| Snapshots | - | Les searchable snaphosts ne sont pas recommandés pour la production. | - |
 | ***Kibana et Opensearch dashboards***            |
 | Lens | Permet de faire des visualisations tr7s facilement. | Non disponible. | - |
 | Canvas | Permet d'obtenir un dashboard plus joli pour afficher sur des ecrans par exemple. | Non disponible. | - | 
